@@ -48,7 +48,8 @@ namespace BMAH_WoM.SourceCode
 
                 foreach (var row in rows)
                 {
-                    if (row != null)
+                    var EmptyTSM = row.SelectSingleNode("//td[1]").InnerText;
+                    if (EmptyTSM == "No results found.")
                     {
                         Debug.Print("TSM has no data for this server at the moment, please try later!");
                     }
