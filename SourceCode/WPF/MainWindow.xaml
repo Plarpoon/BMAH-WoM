@@ -1,0 +1,498 @@
+﻿<Window x:Class="BMAH_WoM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="WoM - BMAH"
+        Height="600"
+        Width="800"
+        ResizeMode="CanMinimize"
+        WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="D:\Home\repos\BMAH-WoM\Resources\AppIcon.png">
+
+    <Window.Resources>
+
+        <!--// Toggle Button Style Template //-->
+
+        <ImageBrush x:Key="tb_mouse_over" ImageSource="D:\Home\repos\BMAH-WoM\Resources\IconMenu_MouseOver.png" />
+
+        <!--// Text Font Style //-->
+
+        <Style x:Key="font_style" TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Fonts/Roboto-Light.ttf #Roboto" />
+
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+
+            <Setter Property="Foreground"
+                    Value="White" />
+
+            <Setter Property="FontSize"
+                    Value="20" />
+        </Style>
+
+        <!--// Tooltip Style Template //-->
+
+        <Style TargetType="ToolTip" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="Background" Value="#4A5668" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
+            <Setter Property="HorizontalOffset" Value="15" />
+            <Setter Property="VerticalOffset" Value="6" />
+            <Setter Property="HasDropShadow" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <!--// App Close Button Style Template //-->
+
+        <ImageBrush x:Key="CloseBtn_Mouseover" ImageSource="D:\Home\repos\BMAH-WoM\Resources\closeBtn_MouseOver.png" />
+
+        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="button"
+                                        Value="{StaticResource CloseBtn_Mouseover}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True">
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <!--// Background Color //-->
+
+        <Grid Background="Black">
+
+            <!--Background Image-->
+
+            <Grid x:Name="BG" PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown">
+
+                <Grid.Background>
+                    <!--// Need to change this disgusting wallpaper with something decent //-->
+                    <ImageBrush x:Name="img_bg"
+                                ImageSource="D:\Home\repos\BMAH-WoM\Resources\img_background.png"
+                                Stretch="Fill">
+                    </ImageBrush>
+                </Grid.Background>
+
+                <!--Start/Stop Button, need to be prettified at one point-->
+                <Grid HorizontalAlignment="Left" Height="491" Margin="100,50,0,0" VerticalAlignment="Top" Width="644">
+                    <Button x:Name="StartBtn" Content="Start" IsDefault="True" Width="80" Height="80" VerticalAlignment="Top" Click="BtnScraper_Click" HorizontalAlignment="Center" Margin="0,400,0,0" />
+                </Grid>
+            </Grid>
+
+            <!--App Shutdown Button-->
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseBtn"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Height="40"
+                        Width="40"
+                        BorderThickness="0"
+                        Style="{StaticResource Close_btn}" Click="Button_Click">
+
+                    <Button.Background>
+
+                        <ImageBrush ImageSource="D:\Home\repos\BMAH-WoM\Resources\closeBtn_default.png" />
+                    </Button.Background>
+                </Button>
+            </Grid>
+
+            <!--// Navigation Panel //-->
+
+            <Grid   x:Name="nav_pnl"
+                    HorizontalAlignment="Left"
+                    Width="65"
+                    Background="#FF990000">
+
+                <StackPanel x:Name="st_pnl">
+
+                    <!--// Grid for the Menu Toggle Button //-->
+
+                    <Grid Height="90">
+
+                        <!--// Menu title text //-->
+
+                        <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="73,-20,0,0"
+                                    Text="M E N U"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource font_style}">
+
+                            <!--// Shadow Effect //-->
+
+                            <TextBlock.Effect>
+
+                                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <!--// Toggle Button //-->
+
+                        <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource tb_style}" Unchecked="Tg_Btn_Unchecked" Checked="Tg_Btn_Checked">
+
+                            <!--// Toggle button default background image //-->
+
+                            <ToggleButton.Background>
+
+                                <ImageBrush Stretch="Fill" ImageSource="D:\Home\repos\BMAH-WoM\Resources\IconMenu_Default.png" />
+                            </ToggleButton.Background>
+
+                            <!--// Toggle Button - Checked, Unchecked events //-->
+
+                            <ToggleButton.Triggers>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="HideStackPanel">
+
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.2">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="ShowStackPanel">
+
+                                            <DoubleAnimation
+
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                    </Grid>
+
+                    <!--// ListView with menu list items //-->
+
+                    <ListView  x:Name="LV"
+                               Background="Transparent"
+                               BorderBrush="Transparent"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <!--// Home //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconHome.png"
+                                       Stretch="Fill"
+                                       Margin="12,0,0,0"
+                                       Height="30"
+                                       Width="30" />
+
+                                <TextBlock Text="Home"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_home"
+                                         Content="Home"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--// Info //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconInfo.png"
+                                       Stretch="Fill"
+                                       Margin="12,0,0,0"
+                                       Height="30"
+                                       Width="30" />
+
+                                <TextBlock Text="Info"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_info"
+                                         Content="Info"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--// Share //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconShare.png"
+                                       Stretch="Fill"
+                                       Margin="12,0,0,0"
+                                       Height="30"
+                                       Width="30" />
+
+                                <TextBlock Text="Share"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_share"
+                                         Content="Share"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--// Settings //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconSettings.png"
+                                       Stretch="Fill"
+                                       Margin="12,0,0,0"
+                                       Height="30"
+                                       Width="30" />
+
+                                <TextBlock Text="Settings"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_settings"
+                                         Content="Settings"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--// Logout //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconLogout.png"
+                                       Stretch="Fill"
+                                       Margin="12,0,0,0"
+                                       Height="30"
+                                       Width="30" />
+
+                                <TextBlock Text="Logout"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}" />
+                            </StackPanel>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_logout"
+                                         Content="Logout"
+                                         Style="{StaticResource tt_style}" />
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+
+                        <!--// Listview items //-->
+
+                        <ListView.ItemContainerStyle>
+
+                            <Style TargetType="ListViewItem">
+
+                                <Setter Property="Template">
+
+                                    <Setter.Value>
+
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                            <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                </ContentPresenter>
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <MultiTrigger>
+
+                                                    <MultiTrigger.Conditions>
+
+                                                        <Condition Property="IsMouseOver" Value="True" />
+                                                    </MultiTrigger.Conditions>
+
+                                                    <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B">
+                                                    </Setter>
+
+                                                    <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B">
+                                                    </Setter>
+                                                </MultiTrigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

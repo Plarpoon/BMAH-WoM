@@ -1,0 +1,6 @@
+﻿<Application
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BMAH_WoM"
+             x:Class="BMAH_WoM.App"
+             StartupUri="SourceCode/WPF/MainWindow.xaml" />
