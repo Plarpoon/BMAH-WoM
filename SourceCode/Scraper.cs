@@ -33,7 +33,10 @@ namespace BMAH_WoM.SourceCode
                 "US-arthas"
             };
 
-            foreach (string wowserver in wowservers)    //cycle trough different WoW servers
+            foreach (string wowserver in wowservers)
+            /*cycle trough different WoW servers consider changing said cycle with another type that supports
+             * an index (will be the same amount of supported servers) so that you can apply a retry extra
+             * cycle if it fails during data retrieval*/
             {
                 var url = @"https://www.tradeskillmaster.com/black-market?realm=" + wowserver;
                 Debug.Print(wowserver);
