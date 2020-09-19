@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 
-
 namespace BMAH_WoM
 {
     /// <summary>
@@ -10,12 +9,18 @@ namespace BMAH_WoM
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly Scraper scraper;
+        private readonly Scraper scraper;
+        private readonly ExportToExcel exporttoexcel;
+
         public MainWindow()
         {
             InitializeComponent();
+
             scraper = new Scraper();
             DataContext = scraper;
+
+            exporttoexcel = new ExportToExcel();
+            DataContext = exporttoexcel;
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
@@ -57,7 +62,7 @@ namespace BMAH_WoM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           //nuovo bottone excel
+            exporttoexcel.ToExcel();
         }
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
