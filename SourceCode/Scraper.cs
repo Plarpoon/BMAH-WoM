@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using ClosedXML.Excel;
+using HtmlAgilityPack;
 using System.Diagnostics;
 
 namespace BMAH_WoM.SourceCode
@@ -33,10 +34,13 @@ namespace BMAH_WoM.SourceCode
                 "US-arthas"
             };
 
+            //var TotalWoWservers = wowservers.Count();
+
             foreach (string wowserver in wowservers)
             /*cycle trough different WoW servers consider changing said cycle with another type that supports
              * an index (will be the same amount of supported servers) so that you can apply a retry extra
              * cycle if it fails during data retrieval*/
+
             {
                 var url = @"https://www.tradeskillmaster.com/black-market?realm=" + wowserver;
                 Debug.Print(wowserver);
@@ -48,7 +52,7 @@ namespace BMAH_WoM.SourceCode
 
                 foreach (var row in rows)
                 {
-                    var EmptyTSM = row.SelectSingleNode("//td[1]").InnerText;
+                    var EmptyTSM = row.SelectSingleNode("td[1]").InnerText;
                     if (EmptyTSM == "No results found.")
                     {
                         Debug.Print("TSM has no data for this server at the moment, please try later!");

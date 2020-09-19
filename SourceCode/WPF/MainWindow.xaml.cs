@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace BMAH_WoM
 {
     /// <summary>
@@ -56,7 +57,7 @@ namespace BMAH_WoM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Close(); //this handles the close event of the button, let's repurpose this completely into exporting everything to Excel
+           //nuovo bottone excel
         }
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
