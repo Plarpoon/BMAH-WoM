@@ -15,6 +15,7 @@ namespace BMAH_WoM.SourceCode
 
             //define Table and it's child names
             var ws = wb.Worksheets.Add("WoM-BMAH scan");
+
             ws.Cell("B2").Value = "WoM-BMAH " + timestamp;
             ws.Cell("B3").Value = "Server Name";
             ws.Cell("C3").Value = "Item Name";
@@ -27,10 +28,16 @@ namespace BMAH_WoM.SourceCode
             ws.Cell("J3").Value = "Realm AH Qty.";
 
             //define ranges
-            var rngTable = ws.Range("B2:J3"); // change the second value of the range to something adaptive based on the amount of data received
+            var rngTable = ws.Range("B2:J3");   //change the second value of the range to something adaptive based on the amount of data received
+
+            //format title cell
+            rngTable.Cell(1, 1).Style.Font.Bold = true;
+            rngTable.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
+            rngTable.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            rngTable.Row(1).Merge();
 
             //header customization
-            var rngHeaders = rngTable.Range("B2:J2"); // The address is relative to rngTable (NOT the worksheet)
+            var rngHeaders = rngTable.Range("B3:J3");   //The address is relative to rngTable (NOT the worksheet)
             rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             rngHeaders.Style.Font.Bold = true;
             rngHeaders.Style.Fill.BackgroundColor = XLColor.Aqua;
@@ -38,6 +45,7 @@ namespace BMAH_WoM.SourceCode
             //table customization
             ws.Columns(2, 10).AdjustToContents();
             rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+            rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
             //save the Excel sheet
             wb.SaveAs("WoM-BMAH.xlsx");
