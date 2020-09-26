@@ -2,7 +2,7 @@
 
 namespace BMAH_WoM.SourceCode
 {
-    public class Program
+    public class Scraper
     {
         public async void ScrapeData()
         {
@@ -34,11 +34,11 @@ namespace BMAH_WoM.SourceCode
 
             foreach (string wowserver in wowservers)
             {
-                var config = Configuration.Default;
-                var context = BrowsingContext.New(config);
+                var config = Configuration.Default.WithDefaultLoader().WithXPath();
+                var source = "https://tradeskillmaster.com/black-market?realm=" + wowserver;
+                var document = await BrowsingContext.New(config).OpenAsync(source);
 
-                var source = @"https://www.tradeskillmaster.com/black-market?realm=" + wowserver;
-                var document = await context.OpenAsync(req => req.Content(source));
+                var ItemName = document.QuerySelectorAll("span:nth-child(1)");
             }
         }
     }

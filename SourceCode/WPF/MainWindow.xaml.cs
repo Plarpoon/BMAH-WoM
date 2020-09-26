@@ -9,15 +9,15 @@ namespace BMAH_WoM
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Program program;
+        private readonly Scraper scraper;
         private readonly ExportToExcel exporttoexcel;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            program = new Program();
-            DataContext = program;
+            scraper = new Scraper();
+            DataContext = scraper;
 
             exporttoexcel = new ExportToExcel();
             DataContext = exporttoexcel;
@@ -67,7 +67,7 @@ namespace BMAH_WoM
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
         {
-            program.ScrapeData();
+            scraper.ScrapeData();
         }
     }
 }
