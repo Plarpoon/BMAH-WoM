@@ -1,4 +1,5 @@
 ﻿using AngleSharp;
+using System.Diagnostics;
 
 namespace BMAH_WoM.SourceCode
 {
@@ -38,7 +39,30 @@ namespace BMAH_WoM.SourceCode
                 var source = "https://tradeskillmaster.com/black-market?realm=" + wowserver;
                 var document = await BrowsingContext.New(config).OpenAsync(source);
 
-                var ItemName = document.QuerySelectorAll("span:nth-child(1)");
+                var rows = document.QuerySelectorAll("*[xpath>'//tbody/tr']");
+                Debug.Print(wowserver);
+
+                foreach (var row in rows)
+                {
+                    var EmptyTSM = row.QuerySelector("*[xpath>'//td[1]']").TextContent;
+                    if (EmptyTSM == "No results found.")
+                    {
+                        Debug.Print("TSM has no data for this server at the moment, please try later!");
+                    }
+                    else
+                    {
+                        var ItemName = row.QuerySelector("*[xpath>'//td[1]/a[1]']").Attributes["title"].Value;
+                        var CurrentBid = row.QuerySelector("*[xpath>'//td[2]']").TextContent;
+                        var MinBid = row.QuerySelector("*[xpath>'//td[3]']").TextContent;
+                        var TimeLeft = row.QuerySelector("*[xpath>'//td[4]']").TextContent;
+                        var NBids = row.QuerySelector("*[xpath>'//td[5]']").TextContent;
+                        var RealmMarket = row.QuerySelector("*[xpath>'//td[6]']").TextContent;
+                        var GlobalMarket = row.QuerySelector("*[xpath>'//td[7]']").TextContent;
+                        var RealmAHQty = row.QuerySelector("*[xpath>'//td[8]']").TextContent;
+
+                        Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", ItemName, CurrentBid, MinBid, TimeLeft, NBids, RealmMarket, GlobalMarket, RealmAHQty);
+                    }
+                }
             }
         }
     }
