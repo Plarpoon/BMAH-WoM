@@ -1,4 +1,5 @@
 ﻿using AngleSharp;
+using AngleSharp.Dom;
 using System.Diagnostics;
 
 namespace BMAH_WoM.SourceCode
@@ -35,9 +36,9 @@ namespace BMAH_WoM.SourceCode
 
             foreach (string wowserver in wowservers)
             {
-                var config = Configuration.Default.WithDefaultLoader().WithXPath();
+                var config = Configuration.Default.WithDefaultLoader().WithXPath().WithJs();
                 var source = "https://tradeskillmaster.com/black-market?realm=" + wowserver;
-                var document = await BrowsingContext.New(config).OpenAsync(source);
+                var document = await BrowsingContext.New(config).OpenAsync(source).WaitUntilAvailable();
 
                 var rows = document.QuerySelectorAll("*[xpath>'//tbody/tr']");
                 Debug.Print(wowserver);
