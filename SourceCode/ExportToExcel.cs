@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.Win32;
 using System;
 
 namespace BMAH_WoM.SourceCode
@@ -48,7 +49,20 @@ namespace BMAH_WoM.SourceCode
             rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
             //save the Excel sheet
-            wb.SaveAs("WoM-BMAH.xlsx");
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel files|*.xlsx"
+            };
+
+            var serialVal = "WoM - BMAH.xlsx";
+
+            saveFileDialog.FileName = serialVal;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                wb.SaveAs(saveFileDialog.FileName);
+                wb.Dispose();
+                return;
+            }
         }
     }
 }

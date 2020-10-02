@@ -1,5 +1,6 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
+using AngleSharp.Io;
 using System.Diagnostics;
 
 namespace BMAH_WoM.SourceCode
@@ -8,9 +9,8 @@ namespace BMAH_WoM.SourceCode
     {
         public async void ScrapeData()
         {
-            string[] wowservers = new string[]
+            string[] wowservers = new string[]  //maximumx 15 server then it will go in lockdown for 5 minutes
             {
-                "EU-aegwynn",
                 "US-area-52",
                 "US-tichondrius",
                 "US-illidan",
@@ -34,9 +34,20 @@ namespace BMAH_WoM.SourceCode
                 "US-arthas"
             };
 
+            int counter = 0;
+
             foreach (string wowserver in wowservers)
             {
-                var config = Configuration.Default.WithDefaultLoader().WithXPath().WithJs();
+                //user-agent modifier
+                var requester = new DefaultHttpRequester();
+                requester.Headers["User-Agent"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+
+                //Anglesharp Configuration
+                var config = Configuration.Default
+                    .With(requester)
+                    .WithDefaultLoader()
+                    .WithXPath()
+                    .WithJs();
                 var source = "https://tradeskillmaster.com/black-market?realm=" + wowserver;
                 var document = await BrowsingContext.New(config).OpenAsync(source).WaitUntilAvailable();
 
