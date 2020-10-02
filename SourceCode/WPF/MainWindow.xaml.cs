@@ -10,7 +10,6 @@ namespace BMAH_WoM
     public partial class MainWindow : Window
     {
         private readonly Scraper scraper;
-        private readonly ExportToExcel exporttoexcel;
 
         public MainWindow()
         {
@@ -18,9 +17,6 @@ namespace BMAH_WoM
 
             scraper = new Scraper();
             DataContext = scraper;
-
-            exporttoexcel = new ExportToExcel();
-            DataContext = exporttoexcel;
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
@@ -62,7 +58,7 @@ namespace BMAH_WoM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            exporttoexcel.ToExcel();
+            //exporttoexcel.ToExcel();
         }
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
