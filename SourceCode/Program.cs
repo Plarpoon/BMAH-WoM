@@ -12,8 +12,6 @@ namespace BMAH_WoM.SourceCode
     {
         public async void ScrapeData()
         {
-            #region Excel composer
-
             var wb = new XLWorkbook();
 
             //prepare time string
@@ -37,27 +35,7 @@ namespace BMAH_WoM.SourceCode
             //define ranges
             var rngTable = ws.Range("B2:J3");   //change the second value of the range to something adaptive based on the amount of data received
 
-            //format title cell
-            rngTable.Cell(1, 1).Style.Font.Bold = true;
-            rngTable.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
-            rngTable.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            rngTable.Row(1).Merge();
-
-            //header customization
-            var rngHeaders = rngTable.Range("B3:J3");   //The address is relative to rngTable (NOT the worksheet)
-            rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            rngHeaders.Style.Font.Bold = true;
-            rngHeaders.Style.Fill.BackgroundColor = XLColor.Aqua;
-
-            //table customization
-            ws.Columns(2, 10).AdjustToContents();
-            rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-            rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-
-            #endregion Excel composer
-
             //world of warcraft server list
-
             string[] wowservers = new string[]
             {
                 "US-area-52",
@@ -65,7 +43,6 @@ namespace BMAH_WoM.SourceCode
                 "US-illidan",
                 "US-zuljin",
                 "US-malganis",
-                "US-thrall",
                 "US-bleeding-hollow",
                 "US-hyjal",
                 "US-turalyon",
@@ -75,14 +52,16 @@ namespace BMAH_WoM.SourceCode
                 "US-frostmourne",
                 "US-barthilas",
                 "US-kiljaeden",
+                "US-scilla",
                 "US-nordrassil",
                 "US-gorefiend",
                 "US-silver-hand",
+                "US-thrall",
                 "US-bloodhoof",
                 "US-kelthuzad",
                 "US-arthas"
             };
-
+            int RowCounter = 3;
             foreach (string wowserver in wowservers)
             {
                 //user-agent
@@ -102,29 +81,69 @@ namespace BMAH_WoM.SourceCode
                 var rows = document.QuerySelectorAll("*[xpath>'//tbody/tr']");
                 Debug.Print(wowserver);
 
-                //value selectors
+                
                 foreach (var row in rows)
                 {
                     var EmptyTSM = row.QuerySelector("*[xpath>'//td[1]']").TextContent;
                     if (EmptyTSM == "No results found.")
                     {
+                        RowCounter += 1;
+                        rngTable = ws.Range("B2:J" + RowCounter);
                         Debug.Print("TSM has no data for this server at the moment, please try again later!");
+                        ws.Cell("B" + RowCounter).Value = wowserver;
+                        ws.Cell("C" + RowCounter).Value = "No results found.";
+                        ws.Cell("D" + RowCounter).Value = "N/A";
+                        ws.Cell("E" + RowCounter).Value = "N/A";
+                        ws.Cell("F" + RowCounter).Value = "N/A";
+                        ws.Cell("G" + RowCounter).Value = "N/A";
+                        ws.Cell("H" + RowCounter).Value = "N/A";
+                        ws.Cell("I" + RowCounter).Value = "N/A";
+                        ws.Cell("J" + RowCounter).Value = "N/A";
                     }
                     else
                     {
+                        RowCounter += 1;
+                        rngTable = ws.Range("B2:J" + RowCounter);
+                        ws.Cell("B" + RowCounter).Value = wowserver;
                         var ItemName = row.QuerySelector("*[xpath>'//td[1]/a[1]']").Attributes["title"].Value;
+                        ws.Cell("C" + RowCounter).Value = ItemName;
                         var CurrentBid = row.QuerySelector("*[xpath>'//td[2]']").TextContent;
+                        ws.Cell("D" + RowCounter).Value = CurrentBid;
                         var MinBid = row.QuerySelector("*[xpath>'//td[3]']").TextContent;
+                        ws.Cell("E" + RowCounter).Value = MinBid;
                         var TimeLeft = row.QuerySelector("*[xpath>'//td[4]']").TextContent;
+                        ws.Cell("F" + RowCounter).Value = TimeLeft;
                         var NBids = row.QuerySelector("*[xpath>'//td[5]']").TextContent;
+                        ws.Cell("G" + RowCounter).Value = NBids;
                         var RealmMarket = row.QuerySelector("*[xpath>'//td[6]']").TextContent;
+                        ws.Cell("H" + RowCounter).Value = RealmMarket;
                         var GlobalMarket = row.QuerySelector("*[xpath>'//td[7]']").TextContent;
+                        ws.Cell("I" + RowCounter).Value = GlobalMarket;
                         var RealmAHQty = row.QuerySelector("*[xpath>'//td[8]']").TextContent;
+                        ws.Cell("J" + RowCounter).Value = RealmAHQty;
 
                         Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", ItemName, CurrentBid, MinBid, TimeLeft, NBids, RealmMarket, GlobalMarket, RealmAHQty);
                     }
                 }
+                RowCounter += 1;    //Experimental, adds a blank row between different servers
             }
+            //format title cell
+            rngTable.Cell(1, 1).Style.Font.Bold = true;
+            rngTable.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
+            rngTable.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            rngTable.Row(1).Merge();
+
+            //header customization
+            var rngHeaders = rngTable.Range("B3:J3");
+            rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            rngHeaders.Style.Font.Bold = true;
+            rngHeaders.Style.Fill.BackgroundColor = XLColor.Aqua;
+
+            //table customization
+            ws.Columns(2, 10).AdjustToContents();
+            rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+            rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+
             //save the Excel sheet
             var saveFileDialog = new SaveFileDialog
             {
