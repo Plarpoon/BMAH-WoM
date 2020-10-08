@@ -39,10 +39,12 @@ namespace BMAH_WoM.SourceCode
             string[] wowservers = new string[]
             {
                 "US-area-52",
+                "US-arthas",
                 "US-tichondrius",
                 "US-illidan",
                 "US-zuljin",
                 "US-malganis",
+                "US-thrall",
                 "US-bleeding-hollow",
                 "US-hyjal",
                 "US-turalyon",
@@ -54,12 +56,15 @@ namespace BMAH_WoM.SourceCode
                 "US-kiljaeden",
                 "US-scilla",
                 "US-nordrassil",
+                "US-deathwing",
+                "US-dentarg",
+                "US-blackhand",
                 "US-gorefiend",
+                "US-wyrmrest-accord",
                 "US-silver-hand",
-                "US-thrall",
+                "US-azuremyst",
                 "US-bloodhoof",
-                "US-kelthuzad",
-                "US-arthas"
+                "US-kelthuzad"
             };
             int RowCounter = 3;
             foreach (string wowserver in wowservers)
@@ -81,7 +86,6 @@ namespace BMAH_WoM.SourceCode
                 var rows = document.QuerySelectorAll("*[xpath>'//tbody/tr']");
                 Debug.Print(wowserver);
 
-                
                 foreach (var row in rows)
                 {
                     var EmptyTSM = row.QuerySelector("*[xpath>'//td[1]']").TextContent;
@@ -89,7 +93,7 @@ namespace BMAH_WoM.SourceCode
                     {
                         RowCounter += 1;
                         rngTable = ws.Range("B2:J" + RowCounter);
-                        Debug.Print("TSM has no data for this server at the moment, please try again later!");
+                        Debug.Print("TSM has no data for this server at the moment, try again later!");
                         ws.Cell("B" + RowCounter).Value = wowserver;
                         ws.Cell("C" + RowCounter).Value = "No results found.";
                         ws.Cell("D" + RowCounter).Value = "N/A";
