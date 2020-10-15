@@ -9,13 +9,13 @@
         Width="800"
         ResizeMode="CanMinimize"
         WindowStyle="SingleBorderWindow"
-        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="D:\Home\repos\BMAH-WoM\Resources\AppIcon.png">
+        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="D:\repos\BMAH-WoM\Resources\AppIcon.png">
 
     <Window.Resources>
 
         <!--// Toggle Button Style Template //-->
 
-        <ImageBrush x:Key="tb_mouse_over" ImageSource="D:\Home\repos\BMAH-WoM\Resources\IconMenu_MouseOver.png" />
+        <ImageBrush x:Key="tb_mouse_over" ImageSource="D:\repos\BMAH-WoM\Resources\IconMenu_MouseOver.png" />
 
         <!--// Text Font Style //-->
 
@@ -59,7 +59,7 @@
 
         <!--// App Close Button Style Template //-->
 
-        <ImageBrush x:Key="CloseBtn_Mouseover" ImageSource="D:\Home\repos\BMAH-WoM\Resources\closeBtn_MouseOver.png" />
+        <ImageBrush x:Key="CloseBtn_Mouseover" ImageSource="D:\repos\BMAH-WoM\Resources\closeBtn_MouseOver.png" />
 
         <Style x:Key="Close_btn" TargetType="{x:Type Button}">
 
@@ -147,7 +147,7 @@
                 <Grid.Background>
                     <!--// Need to change this disgusting wallpaper with something decent //-->
                     <ImageBrush x:Name="img_bg"
-                                ImageSource="D:\Home\repos\BMAH-WoM\Resources\img_background.png"
+                                ImageSource="D:\repos\BMAH-WoM\Resources\img_background.png"
                                 Stretch="Fill">
                     </ImageBrush>
                 </Grid.Background>
@@ -184,7 +184,7 @@
 
                     <Button.Background>
 
-                        <ImageBrush ImageSource="D:\Home\repos\BMAH-WoM\Resources\closeBtn_default.png" />
+                        <ImageBrush ImageSource="D:\repos\BMAH-WoM\Resources\closeBtn_default.png" />
                     </Button.Background>
                 </Button>
             </Grid>
@@ -242,7 +242,7 @@
 
                             <ToggleButton.Background>
 
-                                <ImageBrush Stretch="Fill" ImageSource="D:\Home\repos\BMAH-WoM\Resources\IconMenu_Default.png" />
+                                <ImageBrush Stretch="Fill" ImageSource="D:\repos\BMAH-WoM\Resources\IconMenu_Default.png" />
                             </ToggleButton.Background>
 
                             <!--// Toggle Button - Checked, Unchecked events //-->
@@ -302,7 +302,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconHome.png"
+                                <Image Source="D:\repos\BMAH-WoM\Resources\IconHome.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -331,7 +331,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconInfo.png"
+                                <Image Source="D:\repos\BMAH-WoM\Resources\IconInfo.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -360,7 +360,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconShare.png"
+                                <Image Source="D:\repos\BMAH-WoM\Resources\IconShare.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -389,7 +389,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconSettings.png"
+                                <Image Source="D:\repos\BMAH-WoM\Resources\IconSettings.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -418,7 +418,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\Home\repos\BMAH-WoM\Resources\IconLogout.png"
+                                <Image Source="D:\repos\BMAH-WoM\Resources\IconLogout.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
