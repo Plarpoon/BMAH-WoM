@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "BMAH-WoM": {
-      "commandName": "Project",
-      "remoteDebugEnabled": false
-    }
-  }
-}

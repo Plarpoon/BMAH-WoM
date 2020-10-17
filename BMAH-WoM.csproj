@@ -8,7 +8,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <SignAssembly>false</SignAssembly>
     <StartupObject>BMAH_WoM.App</StartupObject>
-    <ApplicationIcon>Resources\AppIcon.ico</ApplicationIcon>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
@@ -19,6 +19,15 @@
   <ItemGroup>
     <None Remove="SourceCode\icon-home.png" />
     <None Remove="SourceCode\icon-menu.png" />
+    <None Remove="SourceCode\WPF\closebtn_mouseover.png" />
+    <None Remove="SourceCode\WPF\iconhome.png" />
+    <None Remove="SourceCode\WPF\iconinfo.png" />
+    <None Remove="SourceCode\WPF\iconlogout.png" />
+    <None Remove="SourceCode\WPF\iconmenu_default.png" />
+    <None Remove="SourceCode\WPF\iconmenu_mouseover.png" />
+    <None Remove="SourceCode\WPF\iconsettings.png" />
+    <None Remove="SourceCode\WPF\iconshare.png" />
+    <None Remove="SourceCode\WPF\img_background.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,18 +39,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Resource Include="SourceCode\WPF\closebtn_mouseover.png" />
+    <Resource Include="SourceCode\WPF\iconhome.png" />
+    <Resource Include="SourceCode\WPF\iconinfo.png" />
+    <Resource Include="SourceCode\WPF\iconlogout.png" />
+    <Resource Include="SourceCode\WPF\iconmenu_default.png" />
+    <Resource Include="SourceCode\WPF\iconmenu_mouseover.png" />
+    <Resource Include="SourceCode\WPF\iconsettings.png" />
+    <Resource Include="SourceCode\WPF\iconshare.png" />
+    <Resource Include="SourceCode\WPF\img_background.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

@@ -9,20 +9,20 @@
         Width="800"
         ResizeMode="CanMinimize"
         WindowStyle="SingleBorderWindow"
-        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="D:\repos\BMAH-WoM\Resources\AppIcon.png">
+        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True">
 
     <Window.Resources>
 
         <!--// Toggle Button Style Template //-->
 
-        <ImageBrush x:Key="tb_mouse_over" ImageSource="D:\repos\BMAH-WoM\Resources\IconMenu_MouseOver.png" />
+        <ImageBrush x:Key="tb_mouse_over" ImageSource="/SourceCode/WPF/iconmenu_mouseover.png" />
 
         <!--// Text Font Style //-->
 
         <Style x:Key="font_style" TargetType="TextBlock">
 
             <Setter Property="FontFamily"
-                    Value="Fonts/Roboto-Light.ttf #Roboto" />
+                    Value="SourceCode/WPF/Fonts/Roboto-Light.ttf #Roboto" />
 
             <Setter Property="VerticalAlignment"
                     Value="Center" />
@@ -59,7 +59,7 @@
 
         <!--// App Close Button Style Template //-->
 
-        <ImageBrush x:Key="CloseBtn_Mouseover" ImageSource="D:\repos\BMAH-WoM\Resources\closeBtn_MouseOver.png" />
+        <ImageBrush x:Key="CloseBtn_Mouseover" ImageSource="/SourceCode/WPF/closebtn_mouseover.png" />
 
         <Style x:Key="Close_btn" TargetType="{x:Type Button}">
 
@@ -155,7 +155,7 @@
                 <Grid.Background>
                     <!--// Need to change this disgusting wallpaper with something decent //-->
                     <ImageBrush x:Name="img_bg"
-                                ImageSource="D:\repos\BMAH-WoM\Resources\img_background.png"
+                                ImageSource="/SourceCode/WPF/img_background.png"
                                 Stretch="Fill">
                     </ImageBrush>
                 </Grid.Background>
@@ -250,7 +250,7 @@
 
                             <ToggleButton.Background>
 
-                                <ImageBrush Stretch="Fill" ImageSource="D:\repos\BMAH-WoM\Resources\IconMenu_Default.png" />
+                                <ImageBrush Stretch="Fill" ImageSource="/SourceCode/WPF/iconmenu_default.png" />
                             </ToggleButton.Background>
 
                             <!--// Toggle Button - Checked, Unchecked events //-->
@@ -310,7 +310,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\repos\BMAH-WoM\Resources\IconHome.png"
+                                <Image Source="/SourceCode/WPF/iconhome.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -339,7 +339,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\repos\BMAH-WoM\Resources\IconInfo.png"
+                                <Image Source="/SourceCode/WPF/iconinfo.png"
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
@@ -368,11 +368,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\repos\BMAH-WoM\Resources\IconShare.png"
+                                <Image
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
-                                       Width="30" />
+                                       Width="30" Source="/SourceCode/WPF/iconshare.png" />
 
                                 <TextBlock Text="Share"
                                            Margin="25,0,0,0"
@@ -397,11 +397,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\repos\BMAH-WoM\Resources\IconSettings.png"
+                                <Image
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
-                                       Width="30" />
+                                       Width="30" Source="/SourceCode/WPF/iconsettings.png" />
 
                                 <TextBlock Text="Settings"
                                            Margin="25,0,0,0"
@@ -426,11 +426,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="D:\repos\BMAH-WoM\Resources\IconLogout.png"
+                                <Image
                                        Stretch="Fill"
                                        Margin="12,0,0,0"
                                        Height="30"
-                                       Width="30" />
+                                       Width="30" Source="/SourceCode/WPF/iconlogout.png" />
 
                                 <TextBlock Text="Logout"
                                            Margin="25,0,0,0"
