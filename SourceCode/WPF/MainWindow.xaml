@@ -135,14 +135,22 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="401*"/>
+            <ColumnDefinition Width="399*"/>
+        </Grid.ColumnDefinitions>
 
         <!--// Background Color //-->
 
-        <Grid Background="Black">
+        <Grid Background="Black" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
             <!--Background Image-->
 
-            <Grid x:Name="BG" PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown">
+            <Grid x:Name="BG" PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown" Grid.ColumnSpan="2">
 
                 <Grid.Background>
                     <!--// Need to change this disgusting wallpaper with something decent //-->
@@ -153,12 +161,12 @@
                 </Grid.Background>
 
                 <!--Start/Stop Button, need to be prettified at one point-->
-                <Grid HorizontalAlignment="Left" Height="491" Margin="100,50,0,0" VerticalAlignment="Top" Width="644">
-                    <Button x:Name="StartBtn" Content="Start" IsDefault="True" Width="80" Height="80" VerticalAlignment="Top" Click="BtnScraper_Click" HorizontalAlignment="Center" Margin="0,400,0,0" />
+                <Grid x:Name="Internal_Grid" Margin="100,50,35,50">
+                    <Button x:Name="StartBtn" Content="Start" IsDefault="True" Click="BtnScraper_Click" HorizontalAlignment="Left" Margin="280,405,0,0" VerticalAlignment="Top" Width="40" Height="40" />
                 </Grid>
             </Grid>
 
-            <!--App Shutdown Button-->
+            <!--App Shutdown Button
 
             <Grid>
 
@@ -187,7 +195,7 @@
                         <ImageBrush ImageSource="D:\repos\BMAH-WoM\Resources\closeBtn_default.png" />
                     </Button.Background>
                 </Button>
-            </Grid>
+            </Grid> -->
 
             <!--// Navigation Panel //-->
 

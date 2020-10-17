@@ -58,7 +58,7 @@ namespace BMAH_WoM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //exporttoexcel.ToExcel();
+            //Disabled Shutdown Button
         }
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
