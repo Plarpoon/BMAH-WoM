@@ -39,15 +39,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="SourceCode\WPF\closebtn_mouseover.png" />
-    <Resource Include="SourceCode\WPF\iconhome.png" />
-    <Resource Include="SourceCode\WPF\iconinfo.png" />
-    <Resource Include="SourceCode\WPF\iconlogout.png" />
-    <Resource Include="SourceCode\WPF\iconmenu_default.png" />
-    <Resource Include="SourceCode\WPF\iconmenu_mouseover.png" />
-    <Resource Include="SourceCode\WPF\iconsettings.png" />
-    <Resource Include="SourceCode\WPF\iconshare.png" />
-    <Resource Include="SourceCode\WPF\img_background.png" />
+    <Resource Include="SourceCode\WPF\Icons\closebtn_mouseover.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconhome.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconinfo.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconlogout.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconmenu_default.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconmenu_mouseover.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconsettings.png" />
+    <Resource Include="SourceCode\WPF\Icons\iconshare.png" />
+    <Resource Include="SourceCode\WPF\Icons\img_background.png" />
   </ItemGroup>
 
   <ItemGroup>
