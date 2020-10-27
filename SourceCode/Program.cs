@@ -14,14 +14,18 @@ namespace BMAH_WoM.SourceCode
         {
             var wb = new XLWorkbook();
 
-            //prepare time string
-            DateTime localDate = DateTime.Now;
-            string timestamp = localDate.ToString();
+            //preparing time string
+            // Don't be fooled - this really is the Pacific time zone,
+            // not just standard time...
+            var zone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            var utcNow = DateTime.UtcNow;
+            var pacificNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, zone);
+            string timestamp = pacificNow.ToString();
 
             //define Table and it's child names
             var ws = wb.Worksheets.Add("WoM-BMAH scan");
 
-            ws.Cell("B2").Value = "WoM-BMAH " + timestamp;
+            ws.Cell("B2").Value = "WoM-BMAH " + timestamp + " PST";
             ws.Cell("B3").Value = "Server Name";
             ws.Cell("C3").Value = "Item Name";
             ws.Cell("D3").Value = "Current Bid";
@@ -35,7 +39,7 @@ namespace BMAH_WoM.SourceCode
             //define ranges
             var rngTable = ws.Range("B2:J3");   //change the second value of the range to something adaptive based on the amount of data received
 
-            //world of warcraft server list
+            //world of warcraft server array
             string[] wowservers = new string[]
             {
                 "US-area-52",
