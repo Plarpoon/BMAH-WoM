@@ -10,7 +10,7 @@ namespace BMAH_WoM.SourceCode
 {
     public class Scraper
     {
-        public async void ScrapeData()
+        public static async void ScrapeData()
         {
             var wb = new XLWorkbook();
 
@@ -133,7 +133,7 @@ namespace BMAH_WoM.SourceCode
                         Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", ItemName, CurrentBid, MinBid, TimeLeft, NBids, RealmMarket, GlobalMarket, RealmAHQty);
                     }
                 }
-                RowCounter += 1;    //Experimental, adds a blank row between different servers
+                RowCounter += 1;    //adds a blank row between different server rows
             }
             //format title cell
             rngTable.Cell(1, 1).Style.Font.Bold = true;

@@ -63,7 +63,7 @@ namespace BMAH_WoM
 
         private void BtnScraper_Click(object sender, RoutedEventArgs e)
         {
-            scraper.ScrapeData();
+            Scraper.ScrapeData();
         }
     }
 }
