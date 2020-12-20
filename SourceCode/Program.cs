@@ -2,7 +2,7 @@
 using AngleSharp.Dom;
 using AngleSharp.Io;
 using ClosedXML.Excel;
-using Microsoft.Win32;
+using Microsoft.Win32;  // needed for the saving dialog. need to be changed for Linux support.
 using System;
 using System.Diagnostics;
 
@@ -14,9 +14,9 @@ namespace BMAH_WoM.SourceCode
         {
             var wb = new XLWorkbook();
 
-            //preparing time string
-            // Don't be fooled - this really is the Pacific time zone,
-            // not just standard time...
+            // preparing time string
+            // don't be fooled - this really is the Pacific time zone,
+            // mot just standard time...
             var zone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
             var utcNow = DateTime.UtcNow;
             var pacificNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, zone);
