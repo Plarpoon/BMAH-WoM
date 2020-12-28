@@ -22,7 +22,7 @@ namespace BMAH_WoM.SourceCode
             var pacificNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, zone);
             string timestamp = pacificNow.ToString();
 
-            //define Table and it's child names
+            // define Table and it's child names
             var ws = wb.Worksheets.Add("WoM-BMAH scan");
 
             ws.Cell("B2").Value = "WoM-BMAH " + timestamp + " PST";
@@ -36,10 +36,10 @@ namespace BMAH_WoM.SourceCode
             ws.Cell("I3").Value = "Global Market";
             ws.Cell("J3").Value = "Realm AH Qty.";
 
-            //define ranges
-            var rngTable = ws.Range("B2:J3");   //change the second value of the range to something adaptive based on the amount of data received
+            // define ranges
+            var rngTable = ws.Range("B2:J3");   // change the second value of the range to something adaptive based on the amount of data received
 
-            //world of warcraft server array
+            // world of warcraft server array
             string[] wowservers = new string[]
             {
                 "US-area-52",
@@ -73,11 +73,11 @@ namespace BMAH_WoM.SourceCode
             int RowCounter = 3;
             foreach (string wowserver in wowservers)
             {
-                //user-agent
+                // user-agent
                 var requester = new DefaultHttpRequester();
                 requester.Headers["User-Agent"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 
-                //anglesharp configuration
+                // anglesharp configuration
                 var config = Configuration.Default
                     .With(requester)
                     .WithDefaultLoader()
@@ -86,7 +86,7 @@ namespace BMAH_WoM.SourceCode
                 var source = "https://tradeskillmaster.com/black-market?realm=" + wowserver;
                 var document = await BrowsingContext.New(config).OpenAsync(source).WaitUntilAvailable();
 
-                //table selector
+                // table selector
                 var rows = document.QuerySelectorAll("*[xpath>'//tbody/tr']");
                 Debug.Print(wowserver);
 
@@ -133,26 +133,26 @@ namespace BMAH_WoM.SourceCode
                         Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", ItemName, CurrentBid, MinBid, TimeLeft, NBids, RealmMarket, GlobalMarket, RealmAHQty);
                     }
                 }
-                RowCounter += 1;    //adds a blank row between different server rows
+                RowCounter += 1;    // adds a blank row between different server rows
             }
-            //format title cell
+            // format title cell
             rngTable.Cell(1, 1).Style.Font.Bold = true;
             rngTable.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
             rngTable.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             rngTable.Row(1).Merge();
 
-            //header customization
+            // header customization
             var rngHeaders = rngTable.Range("B3:J3");
             rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             rngHeaders.Style.Font.Bold = true;
             rngHeaders.Style.Fill.BackgroundColor = XLColor.Aqua;
 
-            //table customization
+            // table customization
             ws.Columns(2, 10).AdjustToContents();
             rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
             rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
-            //save the Excel sheet
+            // save the Excel sheet
             var saveFileDialog = new SaveFileDialog
             {
                 Filter = "Excel files|*.xlsx"
