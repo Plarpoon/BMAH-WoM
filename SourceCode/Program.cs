@@ -16,7 +16,7 @@ namespace BMAH_WoM.SourceCode
 
             // preparing time string
             // don't be fooled - this really is the Pacific time zone,
-            // mot just standard time...
+            // not just standard time...
             var zone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
             var utcNow = DateTime.UtcNow;
             var pacificNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, zone);
