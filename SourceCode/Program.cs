@@ -5,6 +5,9 @@ using ClosedXML.Excel;
 using Microsoft.Win32;  // needed for the saving dialog. need to be changed for Linux support.
 using System;
 using System.Diagnostics;
+using System.Globalization;
+
+// ReSharper disable StringLiteralTypo
 
 namespace BMAH_WoM.SourceCode
 {
@@ -20,7 +23,7 @@ namespace BMAH_WoM.SourceCode
             var zone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
             var utcNow = DateTime.UtcNow;
             var pacificNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, zone);
-            string timestamp = pacificNow.ToString();
+            var timestamp = pacificNow.ToString(CultureInfo.InvariantCulture);
 
             // define Table and it's child names
             var ws = wb.Worksheets.Add("WoM-BMAH scan");
@@ -40,7 +43,7 @@ namespace BMAH_WoM.SourceCode
             var rngTable = ws.Range("B2:J3");   // change the second value of the range to something adaptive based on the amount of data received
 
             // world of warcraft server array
-            string[] wowservers = new string[]
+            var wowservers = new[]
             {
                 "US-area-52",
                 "US-arthas",
@@ -56,6 +59,8 @@ namespace BMAH_WoM.SourceCode
                 "US-stormrage",
                 "US-sargeras",
                 "US-frostmourne",
+                "US-feathermoon",
+                "US-earthen-ring",
                 "US-barthilas",
                 "US-kiljaeden",
                 "US-scilla",
@@ -68,16 +73,16 @@ namespace BMAH_WoM.SourceCode
                 "US-silver-hand",
                 "US-azuremyst",
                 "US-bloodhoof",
+                "US-moon-guard",
                 "US-kelthuzad"
             };
-            int RowCounter = 3;
-            foreach (string wowserver in wowservers)
+            var rowCounter = 3;
+            foreach (var wowserver in wowservers)
             {
                 // user-agent
                 var requester = new DefaultHttpRequester();
                 requester.Headers["User-Agent"] = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 
-                // anglesharp configuration
                 var config = Configuration.Default
                     .With(requester)
                     .WithDefaultLoader()
@@ -92,48 +97,48 @@ namespace BMAH_WoM.SourceCode
 
                 foreach (var row in rows)
                 {
-                    var EmptyTSM = row.QuerySelector("*[xpath>'//td[1]']").TextContent;
-                    if (EmptyTSM == "No results found.")
+                    var emptyTsm = row.QuerySelector("*[xpath>'//td[1]']").TextContent;
+                    if (emptyTsm == "No results found.")
                     {
-                        RowCounter += 1;
-                        rngTable = ws.Range("B2:J" + RowCounter);
+                        rowCounter += 1;
+                        rngTable = ws.Range("B2:J" + rowCounter);
                         Debug.Print("TSM has no data for this server at the moment, try again later!");
-                        ws.Cell("B" + RowCounter).Value = wowserver;
-                        ws.Cell("C" + RowCounter).Value = "No results found.";
-                        ws.Cell("D" + RowCounter).Value = "N/A";
-                        ws.Cell("E" + RowCounter).Value = "N/A";
-                        ws.Cell("F" + RowCounter).Value = "N/A";
-                        ws.Cell("G" + RowCounter).Value = "N/A";
-                        ws.Cell("H" + RowCounter).Value = "N/A";
-                        ws.Cell("I" + RowCounter).Value = "N/A";
-                        ws.Cell("J" + RowCounter).Value = "N/A";
+                        ws.Cell("B" + rowCounter).Value = wowserver;
+                        ws.Cell("C" + rowCounter).Value = "No results found.";
+                        ws.Cell("D" + rowCounter).Value = "N/A";
+                        ws.Cell("E" + rowCounter).Value = "N/A";
+                        ws.Cell("F" + rowCounter).Value = "N/A";
+                        ws.Cell("G" + rowCounter).Value = "N/A";
+                        ws.Cell("H" + rowCounter).Value = "N/A";
+                        ws.Cell("I" + rowCounter).Value = "N/A";
+                        ws.Cell("J" + rowCounter).Value = "N/A";
                     }
                     else
                     {
-                        RowCounter += 1;
-                        rngTable = ws.Range("B2:J" + RowCounter);
-                        ws.Cell("B" + RowCounter).Value = wowserver;
-                        var ItemName = row.QuerySelector("*[xpath>'//td[1]/a[1]']").Attributes["title"].Value;
-                        ws.Cell("C" + RowCounter).Value = ItemName;
-                        var CurrentBid = row.QuerySelector("*[xpath>'//td[2]']").TextContent;
-                        ws.Cell("D" + RowCounter).Value = CurrentBid;
-                        var MinBid = row.QuerySelector("*[xpath>'//td[3]']").TextContent;
-                        ws.Cell("E" + RowCounter).Value = MinBid;
-                        var TimeLeft = row.QuerySelector("*[xpath>'//td[4]']").TextContent;
-                        ws.Cell("F" + RowCounter).Value = TimeLeft;
-                        var NBids = row.QuerySelector("*[xpath>'//td[5]']").TextContent;
-                        ws.Cell("G" + RowCounter).Value = NBids;
-                        var RealmMarket = row.QuerySelector("*[xpath>'//td[6]']").TextContent;
-                        ws.Cell("H" + RowCounter).Value = RealmMarket;
-                        var GlobalMarket = row.QuerySelector("*[xpath>'//td[7]']").TextContent;
-                        ws.Cell("I" + RowCounter).Value = GlobalMarket;
-                        var RealmAHQty = row.QuerySelector("*[xpath>'//td[8]']").TextContent;
-                        ws.Cell("J" + RowCounter).Value = RealmAHQty;
+                        rowCounter += 1;
+                        rngTable = ws.Range("B2:J" + rowCounter);
+                        ws.Cell("B" + rowCounter).Value = wowserver;
+                        var itemName = row.QuerySelector("*[xpath>'//td[1]/a[1]']").Attributes["title"].Value;
+                        ws.Cell("C" + rowCounter).Value = itemName;
+                        var currentBid = row.QuerySelector("*[xpath>'//td[2]']").TextContent;
+                        ws.Cell("D" + rowCounter).Value = currentBid;
+                        var minBid = row.QuerySelector("*[xpath>'//td[3]']").TextContent;
+                        ws.Cell("E" + rowCounter).Value = minBid;
+                        var timeLeft = row.QuerySelector("*[xpath>'//td[4]']").TextContent;
+                        ws.Cell("F" + rowCounter).Value = timeLeft;
+                        var nBids = row.QuerySelector("*[xpath>'//td[5]']").TextContent;
+                        ws.Cell("G" + rowCounter).Value = nBids;
+                        var realmMarket = row.QuerySelector("*[xpath>'//td[6]']").TextContent;
+                        ws.Cell("H" + rowCounter).Value = realmMarket;
+                        var globalMarket = row.QuerySelector("*[xpath>'//td[7]']").TextContent;
+                        ws.Cell("I" + rowCounter).Value = globalMarket;
+                        var realmAhQty = row.QuerySelector("*[xpath>'//td[8]']").TextContent;
+                        ws.Cell("J" + rowCounter).Value = realmAhQty;
 
-                        Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", ItemName, CurrentBid, MinBid, TimeLeft, NBids, RealmMarket, GlobalMarket, RealmAHQty);
+                        Debug.Print("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", itemName, currentBid, minBid, timeLeft, nBids, realmMarket, globalMarket, realmAhQty);
                     }
                 }
-                RowCounter += 1;    // adds a blank row between different server rows
+                rowCounter += 1;    // adds a blank row between different server rows
             }
             // format title cell
             rngTable.Cell(1, 1).Style.Font.Bold = true;
@@ -158,15 +163,12 @@ namespace BMAH_WoM.SourceCode
                 Filter = "Excel files|*.xlsx"
             };
 
-            var serialVal = "WoM - BMAH.xlsx";
+            const string serialVal = "WoM - BMAH.xlsx";
 
             saveFileDialog.FileName = serialVal;
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                wb.SaveAs(saveFileDialog.FileName);
-                wb.Dispose();
-                return;
-            }
+            if (saveFileDialog.ShowDialog() != true) return;
+            wb.SaveAs(saveFileDialog.FileName);
+            wb.Dispose();
         }
     }
 }
